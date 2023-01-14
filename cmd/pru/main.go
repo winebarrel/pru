@@ -6,7 +6,6 @@ import (
 	"log"
 
 	"github.com/bmatcuk/doublestar/v4"
-	"github.com/google/go-github/v49/github"
 	"github.com/winebarrel/pru"
 )
 
@@ -31,39 +30,37 @@ func main() {
 			log.Fatal(err)
 		}
 
-		if len(flags.patterns) == 0 {
-			update(ctx, client, pr)
-		} else {
-			for _, pat := range flags.patterns {
-				if ok := match(pat, files); ok {
-					update(ctx, client, pr)
+		for _, pat := range flags.patterns {
+			ok, err := match(pat, files)
+
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			if ok {
+				fmt.Printf("update %s\n", *pr.HTMLURL)
+				err := pru.UpdatePullRequestBranch(ctx, client, pr)
+
+				if err != nil {
+					log.Fatal(err)
 				}
 			}
 		}
 	}
 }
 
-func match(pattern string, files []string) bool {
+func match(pattern string, files []string) (bool, error) {
 	for _, f := range files {
 		ok, err := doublestar.Match(pattern, f)
 
 		if err != nil {
-			log.Fatal(err)
+			return false, err
 		}
 
 		if ok {
-			return true
+			return true, nil
 		}
 	}
 
-	return false
-}
-
-func update(ctx context.Context, client *github.Client, pr *github.PullRequest) {
-	fmt.Printf("update %s\n", *pr.HTMLURL)
-	err := pru.UpdatePullRequestBranch(ctx, client, pr)
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	return false, nil
 }
