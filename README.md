@@ -1,6 +1,6 @@
 # pru
 
-pru is a CLI that updates the pull request branch from the base branch that contains the specified file.
+pru is a CLI that updates pull requests branch from the base branch that contains the specified file.
 
 cf. https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#update-a-pull-request-branch
 
