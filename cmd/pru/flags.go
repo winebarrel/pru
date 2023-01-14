@@ -46,9 +46,9 @@ func parseFlags() *Flags {
 
 	switch flag.NArg() {
 	case 0:
-		printErrorAndExit("pass OWNER/REPO and filenames")
+		printErrorAndExit("pass owner/repo and patterns")
 	case 1:
-		printErrorAndExit("pass one or more filenames")
+		printErrorAndExit("pass one or more patterns")
 	}
 
 	args := flag.Args()
@@ -77,6 +77,6 @@ func printVersionAndExit() {
 }
 
 func printErrorAndExit(format string, a ...any) {
-	fmt.Fprintf(os.Stderr, format+"\n", a...)
+	fmt.Fprintf(os.Stderr, "error: "+format+"\n", a...)
 	os.Exit(1)
 }
