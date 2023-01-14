@@ -17,6 +17,7 @@ type Flags struct {
 	owner    string
 	repo     string
 	patterns []string
+	dryRun   bool
 }
 
 func init() {
@@ -33,6 +34,7 @@ func init() {
 func parseFlags() *Flags {
 	flags := &Flags{}
 	flag.StringVar(&flags.token, "token", os.Getenv("GITHUB_TOKEN"), "GitHub access token. use $GITHUB_TOKEN env")
+	flag.BoolVar(&flags.dryRun, "dry-run", false, "dry run")
 	printVer := flag.Bool("version", false, "print version")
 	flag.Parse()
 

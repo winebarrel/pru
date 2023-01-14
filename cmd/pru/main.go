@@ -40,6 +40,11 @@ func main() {
 			}
 
 			if ok {
+				if flags.dryRun {
+					log.Printf("update %s (dry run)\n", *pr.HTMLURL)
+					break
+				}
+
 				log.Printf("update %s\n", *pr.HTMLURL)
 				err := pru.UpdatePullRequestBranch(ctx, client, pr)
 

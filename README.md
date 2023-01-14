@@ -8,6 +8,8 @@ cf. https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#update-a-p
 
 ```
 Usage: pru [OPTION] OWNER/REPO PATTERNS...
+  -dry-run
+    	dry run
   -token string
     	GitHub access token. use $GITHUB_TOKEN env
   -version
