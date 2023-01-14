@@ -44,11 +44,8 @@ func parseFlags() *Flags {
 		printErrorAndExit("GitHub access token is required")
 	}
 
-	switch flag.NArg() {
-	case 0:
-		printErrorAndExit("pass OWNER/REPO and filenames")
-	case 1:
-		printErrorAndExit("pass one or more filenames")
+	if flag.NArg() == 0 {
+		printUsageAndExit()
 	}
 
 	args := flag.Args()
@@ -60,7 +57,10 @@ func parseFlags() *Flags {
 
 	flags.owner = ownerRepo[0]
 	flags.repo = ownerRepo[1]
-	flags.patterns = args[1:]
+
+	if len(args) >= 2 {
+		flags.patterns = args[1:]
+	}
 
 	return flags
 }
@@ -74,6 +74,11 @@ func printVersionAndExit() {
 
 	fmt.Fprintln(flag.CommandLine.Output(), v)
 	os.Exit(0)
+}
+
+func printUsageAndExit() {
+	flag.CommandLine.Usage()
+	os.Exit(1)
 }
 
 func printErrorAndExit(format string, a ...any) {
