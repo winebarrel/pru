@@ -2,10 +2,12 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"log"
+	"strings"
 
 	"github.com/bmatcuk/doublestar/v4"
+	"github.com/google/go-github/v49/github"
 	"github.com/winebarrel/pru"
 )
 
@@ -38,14 +40,25 @@ func main() {
 			}
 
 			if ok {
-				fmt.Printf("update %s\n", *pr.HTMLURL)
+				log.Printf("update %s\n", *pr.HTMLURL)
 				err := pru.UpdatePullRequestBranch(ctx, client, pr)
 
-				if err != nil {
+				if err == nil {
+					break
+				}
+
+				errResp := &github.ErrorResponse{}
+
+				if !errors.As(err, &errResp) {
 					log.Fatal(err)
 				}
 
-				break
+				if strings.Contains(errResp.Error(), "422 merge conflict") {
+					log.Printf("warning: %s", errResp)
+					break
+				}
+
+				log.Fatal(errResp)
 			}
 		}
 	}
