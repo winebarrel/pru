@@ -21,3 +21,13 @@ brews:
     license: MIT
     install: |
       bin.install 'pru'
+nfpms:
+  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Arch }}"
+    homepage: https://github.com/winebarrel/pru
+    maintainer: Genki Sugawara <sugawara@winebarrel.jp>
+    description: pru is a CLI that updates the pull request branch from the base branch that contains the specified file.
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
