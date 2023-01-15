@@ -24,8 +24,12 @@ update https://github.com/my-owner/my-repo/pull/127
 ...
 ```
 
-# Installation
+## Installation
 
 ```
 brew install winebarrel/pru/pru
 ```
+
+## GitHub action
+
+see https://github.com/winebarrel/pru-action
