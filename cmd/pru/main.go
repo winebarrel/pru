@@ -26,6 +26,10 @@ func main() {
 	}
 
 	for _, pr := range pulls {
+		if !contains(flags.bases, *pr.Base.Ref) {
+			continue
+		}
+
 		files, err := pru.ListPullRequestFiles(ctx, client, pr)
 
 		if err != nil {
@@ -83,4 +87,14 @@ func match(pattern string, files []string) (bool, error) {
 	}
 
 	return false, nil
+}
+
+func contains(strs []string, s string) bool {
+	for _, v := range strs {
+		if v == s {
+			return true
+		}
+	}
+
+	return false
 }

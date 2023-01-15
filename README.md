@@ -8,6 +8,8 @@ cf. https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#update-a-p
 
 ```
 Usage: pru [OPTION] OWNER/REPO PATTERNS...
+  -bases value
+    	base branches to update (default "main,master")
   -dry-run
     	dry run
   -token string
