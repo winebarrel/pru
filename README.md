@@ -33,3 +33,7 @@ brew install winebarrel/pru/pru
 ## GitHub action
 
 see https://github.com/winebarrel/pru-action
+
+### Example
+
+see https://github.com/winebarrel/pru-example
