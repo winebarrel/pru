@@ -4,6 +4,29 @@ pru is a tool that updates pull requests branch from the base branch that contai
 
 cf. https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#update-a-pull-request-branch
 
+```mermaid
+gitGraph
+  commit
+  commit
+  branch pr/foo
+  commit
+  commit
+  commit
+  checkout main
+  branch pr/bar
+  commit
+  commit
+  commit
+  checkout main
+  merge pr/foo tag:"merge pull request"
+  commit
+  checkout pr/bar
+  merge main tag:"auto update by pru"
+  checkout main
+  commit
+  commit
+```
+
 ## Usage
 
 ```
