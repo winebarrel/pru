@@ -23,8 +23,6 @@ gitGraph
   checkout pr/bar
   merge main tag:"auto update by pru"
   checkout main
-  commit
-  commit
 ```
 
 ## Usage
