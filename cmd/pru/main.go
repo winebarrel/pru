@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"log"
-	"strings"
 
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/google/go-github/v49/github"
@@ -62,7 +61,7 @@ func main() {
 					log.Fatal(err)
 				}
 
-				if strings.Contains(errResp.Error(), "422 merge conflict") {
+				if errResp.Response.StatusCode == 422 {
 					log.Printf("warning: %s", errResp)
 					break
 				}
