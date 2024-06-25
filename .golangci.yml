@@ -6,3 +6,4 @@ linters:
     - govet
 run:
   timeout: 5m
+  go: 1.18
