@@ -18,7 +18,7 @@ func main() {
 	flags := parseFlags()
 	ctx := context.Background()
 	client := pru.NewGitHubClient(ctx, flags.token)
-	pulls, err := pru.ListOpenPullRequests(ctx, client, flags.owner, flags.repo)
+	pulls, err := pru.ListOpenPullRequests(ctx, client, flags.owner, flags.repo, flags.ignoreLabels)
 
 	if err != nil {
 		log.Fatal(err)

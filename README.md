@@ -34,6 +34,8 @@ Usage: pru [OPTION] OWNER/REPO PATTERNS...
     	base branches to update (default "main,master")
   -dry-run
     	dry run
+  -ignore-labels value
+    	labels for pull requests that do not update
   -token string
     	GitHub access token. use $GITHUB_TOKEN env
   -version

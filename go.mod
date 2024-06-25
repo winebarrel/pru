@@ -1,6 +1,6 @@
 module github.com/winebarrel/pru
 
-go 1.19
+go 1.22
 
 require (
 	github.com/bmatcuk/doublestar/v4 v4.6.1

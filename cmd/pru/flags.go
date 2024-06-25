@@ -13,12 +13,13 @@ var (
 )
 
 type Flags struct {
-	token    string
-	owner    string
-	repo     string
-	patterns []string
-	bases    []string
-	dryRun   bool
+	token        string
+	owner        string
+	repo         string
+	patterns     []string
+	bases        []string
+	dryRun       bool
+	ignoreLabels []string
 }
 
 const (
@@ -41,9 +42,16 @@ func parseFlags() *Flags {
 	flag.StringVar(&flags.token, "token", os.Getenv("GITHUB_TOKEN"), "GitHub access token. use $GITHUB_TOKEN env")
 	flag.Func("bases", `base branches to update (default "`+defaultBases+`")`, func(s string) error {
 		for _, v := range strings.Split(s, ",") {
-			v = strings.TrimSpace(v)
-			if v != "" {
+			if v = strings.TrimSpace(v); v != "" {
 				flags.bases = append(flags.bases, v)
+			}
+		}
+		return nil
+	})
+	flag.Func("ignore-labels", "labels for pull requests that do not update", func(s string) error {
+		for _, v := range strings.Split(s, ",") {
+			if v = strings.TrimSpace(v); v != "" {
+				flags.ignoreLabels = append(flags.ignoreLabels, v)
 			}
 		}
 		return nil
@@ -62,9 +70,9 @@ func parseFlags() *Flags {
 
 	switch flag.NArg() {
 	case 0:
-		printErrorAndExit("pass owner/repo and patterns")
+		printErrorAndExit("pass <owner/repo> and <patterns>")
 	case 1:
-		printErrorAndExit("pass one or more patterns")
+		printErrorAndExit("pass one or more <patterns>")
 	}
 
 	args := flag.Args()
