@@ -2,6 +2,7 @@ package pru
 
 import (
 	"context"
+	"slices"
 
 	"github.com/google/go-github/v49/github"
 	"golang.org/x/oauth2"
@@ -15,7 +16,7 @@ func NewGitHubClient(ctx context.Context, token string) *github.Client {
 	return github.NewClient(tc)
 }
 
-func ListOpenPullRequests(ctx context.Context, client *github.Client, owner string, repo string) ([]*github.PullRequest, error) {
+func ListOpenPullRequests(ctx context.Context, client *github.Client, owner string, repo string, ignoreLabels []string) ([]*github.PullRequest, error) {
 	opt := &github.PullRequestListOptions{
 		State: "open",
 	}
@@ -29,7 +30,15 @@ func ListOpenPullRequests(ctx context.Context, client *github.Client, owner stri
 			return nil, err
 		}
 
-		allPulls = append(allPulls, pulls...)
+	PULLS:
+		for _, p := range pulls {
+			for _, label := range p.Labels {
+				slices.Contains(ignoreLabels, *label.Name)
+				continue PULLS
+			}
+
+			allPulls = append(allPulls, p)
+		}
 
 		if resp.NextPage == 0 {
 			break
