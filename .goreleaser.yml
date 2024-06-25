@@ -1,3 +1,4 @@
+version: 2
 before:
   hooks:
     - go mod tidy
@@ -13,7 +14,7 @@ builds:
 checksum:
   name_template: "checksums.txt"
 brews:
-  - tap:
+  - repository:
       owner: winebarrel
       name: homebrew-pru
     homepage: https://github.com/winebarrel/pru
