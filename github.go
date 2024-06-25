@@ -33,8 +33,9 @@ func ListOpenPullRequests(ctx context.Context, client *github.Client, owner stri
 	PULLS:
 		for _, p := range pulls {
 			for _, label := range p.Labels {
-				slices.Contains(ignoreLabels, *label.Name)
-				continue PULLS
+				if slices.Contains(ignoreLabels, *label.Name) {
+					continue PULLS
+				}
 			}
 
 			allPulls = append(allPulls, p)
