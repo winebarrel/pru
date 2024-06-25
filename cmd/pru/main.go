@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"log"
+	"slices"
 
 	"github.com/bmatcuk/doublestar/v4"
 	"github.com/google/go-github/v49/github"
@@ -25,7 +26,7 @@ func main() {
 	}
 
 	for _, pr := range pulls {
-		if !contains(flags.bases, *pr.Base.Ref) {
+		if !slices.Contains(flags.bases, *pr.Base.Ref) {
 			continue
 		}
 
@@ -86,14 +87,4 @@ func match(pattern string, files []string) (bool, error) {
 	}
 
 	return false, nil
-}
-
-func contains(strs []string, s string) bool {
-	for _, v := range strs {
-		if v == s {
-			return true
-		}
-	}
-
-	return false
 }
