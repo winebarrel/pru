@@ -4,7 +4,7 @@ import (
 	"context"
 	"slices"
 
-	"github.com/google/go-github/v49/github"
+	"github.com/google/go-github/v69/github"
 	"golang.org/x/oauth2"
 )
 
