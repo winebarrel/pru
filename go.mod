@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	github.com/bmatcuk/doublestar/v4 v4.8.1
-	github.com/google/go-github/v49 v49.1.0
+	github.com/google/go-github/v69 v69.2.0
 	github.com/google/go-github/v69 v69.2.0
 	golang.org/x/oauth2 v0.28.0
 )
