@@ -2,7 +2,7 @@ module github.com/winebarrel/pru
 
 go 1.23.0
 
-toolchain go1.25.0
+toolchain go1.25.1
 
 require (
 	github.com/bmatcuk/doublestar/v4 v4.9.1
