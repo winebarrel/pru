@@ -7,7 +7,7 @@ import (
 	"slices"
 
 	"github.com/bmatcuk/doublestar/v4"
-	"github.com/google/go-github/v74/github"
+	"github.com/google/go-github/v75/github"
 	"github.com/winebarrel/pru"
 )
 
